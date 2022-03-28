@@ -44,22 +44,22 @@
 
           <div>
             <label for="postalCode" class="form-label">Rental</label> <br>
-            <input type="number" id="postalCode" placeholder="Select Rental"/>
+            <input type="number" id="postalCode" placeholder="Select Rental" v-model="postalCode"/>
           </div>
           <br>
           <div>
             <label for="expenseType" class="form-label">Type of Expense</label>
-            <input type="text" class="form-control" placeholder="Furnishing"/>
+            <input type="text" class="form-control" placeholder="Furnishing" v-model="expenseType"/>
           </div>
           <br>
           <div>
             <label for="expenseCost" class="form-label">Cost</label>
-            <input type="number" class="form-control" placeholder="4000"/>
+            <input type="number" class="form-control" placeholder="4000" v-model="expenseCost"/>
           </div>
           <br>
           <div>
             <label for="expenseDate" class="form-label">Date of Expense</label><br>
-            <input type="date" id="expenseDate"/>
+            <input type="date" id="expenseDate" v-model="expenseDate"/>
           </div>
         </div>
 
@@ -76,9 +76,24 @@
 </template>
 
 <script>
+import { doc, setDoc, arrayUnion, updateDoc, getDoc } from "firebase/firestore";
+import { db } from "../firebase.js";
+import { getAuth } from "firebase/auth";
+
 export default {
-  name: "MyExpenses"
+  name: "MyExpenses",
+
+  data() {
+    return {
+      postalCode: "",
+      expenseType: "",
+      expenseCost: "",
+      expenseDate: ""
+    };
+    
+  }
 };
+
 </script>
 
 
@@ -100,11 +115,12 @@ export default {
 }
 
 #cancelbtn {
+  background: gray;
   flex: none;
   order: 0;
   flex-grow: 0;
   margin: 0px 15px;
-  position: relative;
+  position: absolute;
   left: 75%;
 }
 
@@ -115,8 +131,8 @@ export default {
   order: 1;
   flex-grow: 0;
   margin: 0px 15px;
-  position: relative;
-  left: 75%;
+  position: absolute;
+  left: 85%;
 }
 
 #expensestable {
