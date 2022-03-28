@@ -14,6 +14,7 @@
   </button>
   <br />
 
+  <!---
   <h1 class="header">My Rental Properties</h1>
   <table id="rentalTable" class="auto-index">
     <tr id="rentalTableHeader">
@@ -22,8 +23,38 @@
       <th>Address</th>
       <th>Unit Number</th>
       <th>Purchase Price</th>
+      <th>View Tenant Details</th>
+      <th>Edit Rental Details</th>
     </tr>
   </table>
+  -->
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+        <th>#</th>
+      <th>Postal Code</th>
+      <th>Address</th>
+      <th>Unit Number</th>
+      <th>Purchase Price</th>
+      <th>View Tenant Details</th>
+      <th>Edit Rental Details</th>
+        </tr>
+        </thead>
+        <tbody> 
+          <tr v-for="(rental, i) in rentals" :key="i">
+            <td> {{i + 1}} </td>
+            <td> {{rental.postalCode}} </td>
+            <td> {{rental.address}} </td>
+            <td> {{rental.unitNumber}} </td>
+            <td> {{rental.purchasePrice}} </td>
+            <td> <button type="button" class="btn btn-primary" @click="this.showTenantDetails(i)">View</button> </td>
+            <td> <button type="button" class="btn btn-primary" @click="this.editRentalDetails(i)">Edit</button> </td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
 
   <h1 class="header">Rent</h1>
   <table id="outstandingRentTable" class="auto-index">
@@ -140,12 +171,14 @@
                 class="form-control"
                 id="firstName2"
                 placeholder="First Name"
+                v-model="firstName2"
               />
               <input
                 type="text"
                 class="form-control"
                 id="lastName2"
                 placeholder="Last Name"
+                v-model="lastName2"
               />
               <label for="contractStartDate" class="form-label"
                 >Contract Start Date:</label
@@ -154,16 +187,23 @@
                 type="date"
                 id="contractStartDate2"
                 name="contractStartDate"
+                v-model="contractStartDate2"
               /><br />
               <label for="contractEndDate" class="form-label"
                 >Contract End Date:</label
               >
-              <input type="date" id="contractEndDate2" name="contractEndDate" />
+              <input
+                type="date"
+                id="contractEndDate2"
+                name="contractEndDate"
+                v-model="contractEndDate2"
+              />
               <input
                 type="number"
                 class="form-control"
                 id="monthlyRent2"
                 placeholder="Monthly Rent"
+                v-model="monthlyRent2"
               />
             </div>
 
@@ -174,12 +214,14 @@
                 class="form-control"
                 id="firstName3"
                 placeholder="First Name"
+                v-model="firstName3"
               />
               <input
                 type="text"
                 class="form-control"
                 id="lastName3"
                 placeholder="Last Name"
+                v-model="lastName3"
               />
               <label for="contractStartDate" class="form-label"
                 >Contract Start Date:</label
@@ -188,16 +230,23 @@
                 type="date"
                 id="contractStartDate3"
                 name="contractStartDate"
+                v-model="contractStartDate3"
               /><br />
               <label for="contractEndDate" class="form-label"
                 >Contract End Date:</label
               >
-              <input type="date" id="contractEndDate3" name="contractEndDate" />
+              <input
+                type="date"
+                id="contractEndDate3"
+                name="contractEndDate"
+                v-model="contractEndDate3"
+              />
               <input
                 type="number"
                 class="form-control"
                 id="monthlyRent3"
                 placeholder="Monthly Rent"
+                v-model="monthlyRent3"
               />
             </div>
 
@@ -208,12 +257,14 @@
                 class="form-control"
                 id="firstName4"
                 placeholder="First Name"
+                v-model="firstName4"
               />
               <input
                 type="text"
                 class="form-control"
                 id="lastName4"
                 placeholder="Last Name"
+                v-model="lastName4"
               />
               <label for="contractStartDate" class="form-label"
                 >Contract Start Date:</label
@@ -222,16 +273,23 @@
                 type="date"
                 id="contractStartDate4"
                 name="contractStartDate"
+                v-model="contractStartDate4"
               /><br />
               <label for="contractEndDate" class="form-label"
                 >Contract End Date:</label
               >
-              <input type="date" id="contractEndDate4" name="contractEndDate" />
+              <input
+                type="date"
+                id="contractEndDate4"
+                name="contractEndDate"
+                v-model="contractEndDate4"
+              />
               <input
                 type="number"
                 class="form-control"
                 id="monthlyRent4"
                 placeholder="Monthly Rent"
+                v-model="monthlyRent4"
               />
             </div>
 
@@ -242,12 +300,14 @@
                 class="form-control"
                 id="firstName5"
                 placeholder="First Name"
+                v-model="firstName5"
               />
               <input
                 type="text"
                 class="form-control"
                 id="lastName5"
                 placeholder="Last Name"
+                v-model="lastName5"
               />
               <label for="contractStartDate" class="form-label"
                 >Contract Start Date:</label
@@ -256,16 +316,23 @@
                 type="date"
                 id="contractStartDate5"
                 name="contractStartDate"
+                v-model="contractStartDate5"
               /><br />
               <label for="contractEndDate" class="form-label"
                 >Contract End Date:</label
               >
-              <input type="date" id="contractEndDate5" name="contractEndDate" />
+              <input
+                type="date"
+                id="contractEndDate5"
+                name="contractEndDate"
+                v-model="contractEndDate5"
+              />
               <input
                 type="number"
                 class="form-control"
                 id="monthlyRent5"
                 placeholder="Monthly Rent"
+                v-model="monthlyRent5"
               />
             </div>
 
@@ -315,13 +382,121 @@ export default {
       contractStartDate1: "",
       contractEndDate1: "",
       monthlyRent1: "",
+
+      firstName2: "",
+      lastName2: "",
+      contractStartDate2: "",
+      contractEndDate2: "",
+      monthlyRent2: "",
+
+      firstName3: "",
+      lastName3: "",
+      contractStartDate3: "",
+      contractEndDate3: "",
+      monthlyRent3: "",
+
+      firstName4: "",
+      lastName4: "",
+      contractStartDate4: "",
+      contractEndDate4: "",
+      monthlyRent4: "",
+
+      firstName5: "",
+      lastName5: "",
+      contractStartDate5: "",
+      contractEndDate5: "",
+      monthlyRent5: "",
+
+      rentals: {},
     };
   },
   async mounted() {
     await this.updateUnpaid();
+    //await this.displayRentals();
+    const auth = getAuth();
+    const userEmail = auth.currentUser.email;
+    const ref = doc(db, "Rentals", userEmail);
+    const docSnap = await getDoc(ref);
+    const rentals = docSnap.data().rentals;
+    console.log(rentals);
+    this.rentals = rentals;
   },
 
   methods: {
+
+    showTenantDetails(id) {
+        alert(id)
+      },
+
+    editRentalDetails(id) {
+        alert(id);
+      },
+
+    async displayRentals() {
+      const auth = getAuth();
+      const userEmail = auth.currentUser.email;
+      const ref = doc(db, "Rentals", userEmail);
+      const docSnap = await getDoc(ref);
+      const rentals = docSnap.data().rentals;
+      //console.log(rentals);
+
+      let ind = 1;
+      var table = document.getElementById("rentalTable");
+      while (table.rows.length > 1) {
+        table.deleteRow(1);
+      }
+
+      for (let rental of rentals) {
+        var row = table.insertRow(ind);
+        var postalCode = rental.postalCode;
+        var address = rental.address;
+        var unitNumber = rental.unitNumber;
+        var purchasePrice = rental.purchasePrice;
+
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        var cell7 = row.insertCell(6);
+
+        cell1.innerHTML = ind;
+        cell2.innerHTML = postalCode;
+        cell3.innerHTML = address;
+        cell4.innerHTML = unitNumber;
+        cell5.innerHTML = purchasePrice;
+
+        var viewTenantDetailsButton = document.createElement("button");
+        viewTenantDetailsButton.className = "btn btn-primary";
+
+        viewTenantDetailsButton.id = ind;
+        viewTenantDetailsButton.innerHTML = "View Tenant Details";
+        viewTenantDetailsButton.onclick = function () {
+          showTenantDetails();
+        };
+        cell6.appendChild(viewTenantDetailsButton);
+
+        var editRentalDetailsButton = document.createElement("button");
+        editRentalDetailsButton.className = "btn btn-warning";
+        editRentalDetailsButton.id = ind;
+        editRentalDetailsButton.innerHTML = "Edit Rental Details";
+        editRentalDetailsButton.onclick = function () {
+          editRentalDetails(ind - 1);
+        };
+        cell7.appendChild(editRentalDetailsButton);
+
+        ind += 1;
+      }
+
+      function showTenantDetails(id) {
+        alert(id)
+      }
+
+      function editRentalDetails(id) {
+        alert(id);
+      }
+    },
     addMonths(date, m) {
       return moment(date).add(m, "months").format("YYYY-MM-DD");
     },
@@ -334,22 +509,38 @@ export default {
       const rentals = docSnap.data().rentals;
 
       for (let rental of rentals) {
-        console.log(rental);
+        // console.log(rental);
         for (let tenant of rental.tenants) {
-          console.log(tenant);
+          // console.log(tenant);
           while (moment(tenant.nextPaymentDate).isBefore(moment())) {
-            console.log("owe money");
+            // console.log("owe money");
             tenant.numberOfMonthsRentalUnpaid += 1;
             tenant.nextPaymentDate = this.addMonths(tenant.nextPaymentDate, 1);
           }
         }
       }
-      console.log(rentals);
+      // console.log(rentals);
       await updateDoc(ref, { rentals: rentals });
-      console.log("updated number of months rental unpaid!")
+      console.log("updated number of months rental unpaid!");
     },
 
     async saveRental() {
+      // Validation of inputs property details
+      console.log(String(this.postalCode).length);
+      if (String(this.postalCode).length !== 6) {
+        alert("Please enter a valid postal code");
+        return;
+      } else if (!this.address) {
+        alert("Please enter a valid address");
+        return;
+      } else if (!this.unitNumber) {
+        alert("Please enter a valid unit number");
+        return;
+      } else if (!this.purchasePrice) {
+        alert("Please enter a valid purchase price");
+        return;
+      }
+
       const auth = getAuth();
       const userEmail = auth.currentUser.email;
       const ref = doc(db, "Rentals", userEmail);
@@ -389,6 +580,42 @@ export default {
             nextPaymentDate: this.addMonths(this.contractStartDate1, 1),
             numberOfMonthsRentalUnpaid: 0,
           },
+          {
+            firstName: this.firstName2,
+            lastName: this.lastName2,
+            contractStartDate: this.contractStartDate2,
+            contractEndDate: this.contractEndDate2,
+            monthlyRent: this.monthlyRent2,
+            nextPaymentDate: this.addMonths(this.contractStartDate2, 1),
+            numberOfMonthsRentalUnpaid: 0,
+          },
+          {
+            firstName: this.firstName3,
+            lastName: this.lastName3,
+            contractStartDate: this.contractStartDate3,
+            contractEndDate: this.contractEndDate3,
+            monthlyRent: this.monthlyRent3,
+            nextPaymentDate: this.addMonths(this.contractStartDate3, 1),
+            numberOfMonthsRentalUnpaid: 0,
+          },
+          {
+            firstName: this.firstName4,
+            lastName: this.lastName4,
+            contractStartDate: this.contractStartDate4,
+            contractEndDate: this.contractEndDate4,
+            monthlyRent: this.monthlyRent4,
+            nextPaymentDate: this.addMonths(this.contractStartDate4, 1),
+            numberOfMonthsRentalUnpaid: 0,
+          },
+          {
+            firstName: this.firstName5,
+            lastName: this.lastName5,
+            contractStartDate: this.contractStartDate5,
+            contractEndDate: this.contractEndDate5,
+            monthlyRent: this.monthlyRent5,
+            nextPaymentDate: this.addMonths(this.contractStartDate5, 1),
+            numberOfMonthsRentalUnpaid: 0,
+          },
         ],
       };
 
@@ -404,6 +631,7 @@ export default {
 
       document.getElementById("addRentalForm").reset();
       this.updateUnpaid();
+      await this.displayRentals();
     },
   },
 };
